@@ -169,6 +169,10 @@ main()
       IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-kubernetes-context-colors" "cyan dark_gray")
       script="#($current_dir/kubernetes_context.sh $show_kubernetes_context_label)"
 
+    elif [ $plugin = "attached-clients" ]; then
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-attached-clients-colors" "cyan dark_gray")
+      script="#($current_dir/attached_clients.sh)"
+
     elif [ $plugin = "weather" ]; then
       # wait unit $datafile exists just to avoid errors
       # this should almost never need to wait unless something unexpected occurs
