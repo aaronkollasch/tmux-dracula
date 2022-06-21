@@ -25,10 +25,7 @@ ping_function() {
 }
 
 main() {
-
   echo $(ping_function)
-  RATE=$(get_tmux_option "@dracula-ping-rate" 5)
-  sleep $RATE
 }
 
 # run main driver
