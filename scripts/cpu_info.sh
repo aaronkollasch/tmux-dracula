@@ -41,8 +41,6 @@ get_load() {
 }
 
 main() {
-  # storing the refresh rate in the variable RATE, default is 5
-  RATE=$(get_tmux_option "@dracula-refresh-rate" 5)
   cpu_load=$(get_tmux_option "@dracula-cpu-display-load" false)
   if [ "$cpu_load" = true ]; then
     echo "$(get_load)"
@@ -51,7 +49,6 @@ main() {
     cpu_percent=$(get_percent)
     echo "$cpu_label $cpu_percent"
   fi
-  sleep $RATE
 }
 
 # run main driver

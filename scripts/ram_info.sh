@@ -69,7 +69,6 @@ main()
   ram_label=$(get_tmux_option "@dracula-ram-usage-label" "RAM")
   ram_percent=$(get_percent)
   echo "$ram_label $ram_percent"
-  sleep $RATE
 }
 
 #run main driver
