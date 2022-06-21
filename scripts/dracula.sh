@@ -72,7 +72,7 @@ main()
     false)
       timezone="";;
     true)
-      timezone="#(date +%Z)";;
+      timezone="#(date +%Z) ";;
   esac
 
   case $show_flags in
@@ -226,13 +226,13 @@ main()
         script=${time_format}
       else
         if $show_day_month && $show_military ; then # military time and dd/mm
-          script="%a %d/%m %R ${timezone} "
+          script="%a %d/%m %R ${timezone}"
         elif $show_military; then # only military time
-          script="%a %m/%d %R ${timezone} "
+          script="%a %m/%d %R ${timezone}"
         elif $show_day_month; then # only dd/mm
-          script="%a %d/%m %I:%M %p ${timezone} "
+          script="%a %d/%m %I:%M %p ${timezone}"
         else
-          script="%a %m/%d %I:%M %p ${timezone} "
+          script="%a %m/%d %I:%M %p ${timezone}"
         fi
       fi
     elif [ $plugin = "synchronize-panes" ]; then
