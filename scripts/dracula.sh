@@ -165,6 +165,10 @@ main()
       IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-attached-clients-colors" "cyan dark_gray")
       script="#($current_dir/attached_clients.sh)"
 
+    elif [ $plugin = "continuum" ]; then
+      IFS=' ' read -r -a colors <<<$(get_tmux_option "@dracula-continuum-colors" "cyan dark_gray")
+      script="#($current_dir/continuum.sh)"
+
     elif [ $plugin = "weather" ]; then
       # wait unit $datafile exists just to avoid errors
       # this should almost never need to wait unless something unexpected occurs
