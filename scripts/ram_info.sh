@@ -5,22 +5,41 @@ export LC_ALL=en_US.UTF-8
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $current_dir/utils.sh
 
+mb_to_gb() {
+  if [ $# == 0 ]; then
+    read num
+  else
+    num="$1"
+  fi
+  bc <<< "scale=3;$num/1024"
+}
+
+round() {
+  if [ $# == 1 ]; then
+    read num
+    scale="$1"
+  elif [ $# == 2 ]; then
+    num="$1"
+    scale="$2"
+  fi
+  printf "%.${scale}f" "${num}"
+}
+
 get_percent()
 {
   case $(uname -s) in
     Linux)
-      total_mem_gb=$(free -g | awk '/^Mem/ {print $2}')
-      used_mem=$(free -g | awk '/^Mem/ {print $3}')
-      total_mem=$(free -h | awk '/^Mem/ {print $2}')
+      total_mem_gb=$(free -m | awk '/^Mem/ {print $2}' | mb_to_gb | round 0)
+      used_mem=$(free -m | awk '/^Mem/ {print $3}' | mb_to_gb | round 0)
       if (( $total_mem_gb == 0)); then
-        memory_usage=$(free -m | awk '/^Mem/ {print $3}')
-        total_mem_mb=$(free -m | awk '/^Mem/ {print $2}')
+        memory_usage=$(free -m | awk '/^Mem/ {print $3}' | round 0)
+        total_mem_mb=$(free -m | awk '/^Mem/ {print $2}' | round 0)
         echo $memory_usage\M\B/$total_mem_mb\M\B
       elif (( $used_mem == 0 )); then
-        memory_usage=$(free -m | awk '/^Mem/ {print $3}')
+        memory_usage=$(free -m | awk '/^Mem/ {print $3}' | round 0)
         echo $memory_usage\M\B/$total_mem_gb\G\B
       else
-        memory_usage=$(free -g | awk '/^Mem/ {print $3}')
+        memory_usage=$(free -g | awk '/^Mem/ {print $3}' | mb_to_gb | round 0)
         echo $memory_usage\G\B/$total_mem_gb\G\B
       fi
       ;;
