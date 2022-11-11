@@ -197,7 +197,7 @@ main()
       if $show_day_month && $show_military ; then # military time and dd/mm
         script="%a %d/%m %R ${timezone}"
       elif $show_military; then # only military time
-        script="%a %m/%d %R ${timezone}"
+        script="%m/%d %R ${timezone}"
       elif $show_day_month; then # only dd/mm
         script="%a %d/%m %I:%M %p ${timezone}"
       else
