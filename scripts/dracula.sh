@@ -317,10 +317,10 @@ main() {
       if [ -n "$time_format" ]; then
         script=${time_format}
       else
-        if $show_day_month && $show_military ; then # military time and dd/mm
-          script="%a %d/%m %R ${timezone}"
-        elif $show_military; then # only military time
-          script="%R ${timezone}"
+        if $show_day_month && $show_military ; then
+          script="%d/%m %R ${timezone}"
+        elif $show_military; then
+          script="%m/%d %R ${timezone}"
         elif $show_day_month; then # only dd/mm
           script="%a %d/%m %I:%M %p ${timezone}"
         else
