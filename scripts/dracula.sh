@@ -70,17 +70,19 @@ main() {
 
   # Set transparency variables - Colors and window dividers
   if $transparent_powerline_bg; then
-	bg_color="default"
-	if $show_edge_icons; then
-	  window_sep_fg=${dark_purple}
-	  window_sep_bg=default
-	  window_sep="$show_right_sep"
-	else
-	  window_sep_fg=${dark_purple}
-	  window_sep_bg=default
-	  window_sep="$show_inverse_divider"
-	fi
+    fg_color="default"
+    bg_color="default"
+    if $show_edge_icons; then
+      window_sep_fg=${dark_purple}
+      window_sep_bg=default
+      window_sep="$show_right_sep"
+    else
+      window_sep_fg=${dark_purple}
+      window_sep_bg=default
+      window_sep="$show_inverse_divider"
+    fi
   else
+    fg_color=${white}
     bg_color=${gray}
     if $show_edge_icons; then
       window_sep_fg=${dark_purple}
@@ -167,7 +169,7 @@ main() {
   tmux set-option -g message-style "bg=${gray},fg=${white}"
 
   # status bar
-  tmux set-option -g status-style "bg=${bg_color},fg=${white}"
+  tmux set-option -g status-style "bg=${bg_color},fg=${fg_color}"
 
   # Status left
   if $show_powerline; then
@@ -394,7 +396,7 @@ main() {
     tmux set-window-option -g window-status-current-format "#[fg=${white},bg=${dark_purple}] #I #W${current_flags} "
   fi
 
-  tmux set-window-option -g window-status-format "#[fg=${white}]#[bg=${bg_color}] #I #W${flags}"
+  tmux set-window-option -g window-status-format "#[fg=${fg_color}]#[bg=${bg_color}] #I #W${flags}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
 }
